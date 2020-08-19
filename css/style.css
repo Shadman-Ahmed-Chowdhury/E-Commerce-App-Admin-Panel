@@ -1,0 +1,16 @@
+ul li {
+    list-style: none;
+}
+
+.card {
+    margin: 20px 20px;
+    padding: 20px;
+}
+
+.card-image {
+    margin: 0px auto;
+}
+
+.btn {
+    margin: 10px 20px;
+}

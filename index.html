@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>E-Commerce App Admin Panel</title>
+
+        <!-- Bootstrap CDN -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        />
+
+        <!-- xlsx CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.5/xlsx.full.min.js"></script>
+
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <h1 class="text-center">Form for saving product</h1>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <input
+                        type="file"
+                        class="form-control"
+                        name=""
+                        id="input"
+                        accept=".xls, .xlsx"
+                    />
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" id="button">Convert</button>
+                </div>
+                <!--  
+                <div class="col-md-12">
+                    <pre id="jsondata"></pre>
+                </div>
+            --></div>
+        </div>
+
+        <div class="container">
+            <div class="container" id="dataForm">
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input
+                        type="text"
+                        name="productName"
+                        class="form-control"
+                        id="productName"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input
+                        type="number"
+                        name="price"
+                        class="form-control"
+                        id="price"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="code">Code</label>
+                    <input
+                        type="number"
+                        name="code"
+                        class="form-control"
+                        id="code"
+                        required
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    Submit
+                </button>
+            </div>
+        </div>
+
+        <div class="container list">
+            <ul id="productList"></ul>
+        </div>
+
+        <a href="#" onclick="myFunction()" class="btn btn-primary">Test</a>
+        <script>
+            function myFunction() {
+                var code = prompt("Enter the code: ");
+                console.log(code);
+            }
+        </script>
+
+        <!-- firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+        <script type="module" src="Config/FirebaseConfig.js"></script>
+
+        <!-- javascript file -->
+        <script type="module" src="js/app.js"></script>
+    </body>
+</html>
