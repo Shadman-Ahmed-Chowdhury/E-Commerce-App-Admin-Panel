@@ -89,6 +89,12 @@ submitBtn.addEventListener("click", (e) => {
 });
 const productList = document.querySelector("#productList");
 
+function editFunction() {
+    var getCode = prompt("Type the product code: ");
+    localStorage.setItem("storageName", getCode);
+    console.log("Edit Button Clicked");
+}
+
 // Product List Display
 function renderProductList(doc) {
     let li = document.createElement("li");
@@ -113,18 +119,16 @@ function renderProductList(doc) {
     <p class="text-center"> ` +
         doc.data().Code +
         `</p>
-        <a href="#" onclick="editFunction()" class="btn btn-secondary">Edit</a>
+        <a href="edit.html" onclick="editFunction(${
+            doc.data().Code
+        })" class="btn btn-secondary">Edit</a>
+        
         <a href="#" class="btn btn-danger ">Delete</a>
 </div> `;
 
     li.appendChild(content);
 
     productList.appendChild(li);
-}
-
-function editFunction() {
-    var getCode = prompt("Type the product code: ");
-    localStorage.setItem("storageName", getCode);
 }
 
 //Real Time Data Fetching

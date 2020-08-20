@@ -85,10 +85,12 @@
             <ul id="productList"></ul>
         </div>
 
-        <a href="#" onclick="myFunction()" class="btn btn-primary">Test</a>
         <script>
-            function myFunction() {
-                var code = prompt("Enter the code: ");
+            //Function on click EDIT Button
+            function editFunction(code) {
+                //var getCode = prompt("Type the product code: ");
+                localStorage.setItem("storageName", code);
+                console.log("Edit Button Clicked");
                 console.log(code);
             }
         </script>
