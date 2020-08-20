@@ -15,6 +15,21 @@ document.getElementById("input").addEventListener("change", (event) => {
     selectedFile = event.target.files[0];
 });
 
+var monthList = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
 var myArray = [];
 
 document.getElementById("button").addEventListener("click", () => {
@@ -38,15 +53,35 @@ document.getElementById("button").addEventListener("click", () => {
             // Saving Data
             event.preventDefault();
             for (var i = 0; i < myArray.length; i++) {
-                var code = "00" + myArray[i].Code.toString(10);
+                var priceList = [];
+                priceList.push(myArray[i].Price);
+                var dateList = [];
+                const d = myArray[i].Date;
+                //console.log(d);
+                let dateObj = new Date((d - 25569) * 86400 * 1000);
+                let m = dateObj.getMonth();
+                let month = monthList[m];
+                let y = dateObj.getFullYear().toString();
+                let year = y.slice(-2);
+                let day = dateObj.getDay();
+
+                let date = day + "-" + month + "-" + year;
+                dateList.push(date);
+                var code = myArray[i].Code.toString(10);
                 console.log(code);
                 firestore
-                    .collection("products")
+                    .collection("Products")
                     .doc(code)
                     .set({
-                        ProductName: myArray[i].Product,
-                        Price: myArray[i].Price,
-                        Code: myArray[i].Code,
+                        storageImageURL: "",
+                        imageURL: "",
+                        productCode: myArray[i].Code,
+                        productName: myArray[i].Title,
+                        dateList: dateList,
+                        priceList: priceList,
+                        category: myArray[i].Category,
+                        productType: myArray[i].Product_Type,
+                        bottomMessage: "",
                     })
                     .then(function () {
                         console.log("Data Saved!");
@@ -60,7 +95,7 @@ document.getElementById("button").addEventListener("click", () => {
 });
 
 //Saving Data from the form manually
-
+/*
 const productName = document.querySelector("#productName");
 const price = document.querySelector("#price");
 const code = document.querySelector("#code");
@@ -94,6 +129,7 @@ function editFunction() {
     localStorage.setItem("storageName", getCode);
     console.log("Edit Button Clicked");
 }
+*/
 
 // Product List Display
 function renderProductList(doc) {
@@ -106,21 +142,24 @@ function renderProductList(doc) {
     var image = document.createElement("img");
     image.src = "./../images/default.jpg";
     span.appendChild(image);
+    //var imageURL = "./../images/default.jpg";
+    var imageURL =
+        "https://www.bandg.com/assets/img/default-product-img.png?w=400&h=225&scale=both&mode=max";
     content.innerHTML +=
         `<div class="card" style="width: 24rem;">
-        <img class="card-image" src="./../images/default.jpg" width="200" height="150">
+        <img class="card-image" src=${imageURL} width="200" height="150">
         <h3 class="text-center">` +
-        doc.data().ProductName +
+        doc.data().productName +
         `</h3>
 
     <p class="text-center">` +
-        doc.data().Price +
-        `$</p>
+        doc.data().category +
+        `</p>
     <p class="text-center"> ` +
-        doc.data().Code +
+        doc.data().productCode +
         `</p>
         <a href="edit.html" onclick="editFunction(${
-            doc.data().Code
+            doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
         
         <a href="#" class="btn btn-danger ">Delete</a>
@@ -133,10 +172,10 @@ function renderProductList(doc) {
 
 //Real Time Data Fetching
 
-firestore.collection("products").onSnapshot((snapshot) => {
+firestore.collection("Products").onSnapshot((snapshot) => {
     let changes = snapshot.docChanges();
     changes.forEach((change) => {
-        console.log(change.doc.data());
+        //console.log(change.doc.data());
         if (change.type === "added") {
             renderProductList(change.doc);
         }

@@ -1,3 +1,11 @@
+.input-file {
+    text-align: center;
+    display: grid;
+}
+.file {
+    margin: 0px auto;
+    max-width: 500px;
+}
 ul li {
     list-style: none;
 }

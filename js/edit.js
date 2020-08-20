@@ -13,21 +13,22 @@ document.getElementById("formDiv").style.visibility = "hidden";
 
 //console.log(localStorage.getItem("storageName"));
 const tempCode = localStorage.getItem("storageName");
-const code = "00" + tempCode.toString(10);
-console.log(code);
+const code = tempCode.toString(10);
+//console.log(code);
 firestore
-    .collection("products")
+    .collection("Products")
     .doc(code)
     .get()
     .then(function (doc) {
         if (doc.exists) {
             document.getElementById("formDiv").style.visibility = "visible";
             //console.log(doc.data().ProductName);
+            //console.log(code);
             document.getElementById(
                 "productName"
-            ).value = doc.data().ProductName;
-            document.getElementById("price").value = doc.data().Price;
-            document.getElementById("code").value = doc.data().Code;
+            ).value = doc.data().productName;
+            document.getElementById("price").value = doc.data().category;
+            document.getElementById("code").value = doc.data().productCode;
         }
     });
 
@@ -36,18 +37,16 @@ const price = document.querySelector("#price");
 
 const submitBtn = document.querySelector("#submitBtn");
 
-console.log(code);
-
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
     firestore
-        .collection("products")
+        .collection("Products")
         .doc(code)
         .update({
-            ProductName: productName.value,
-            Price: price.value,
-            Code: code,
+            productName: productName.value,
+            category: price.value,
+            productCode: code,
         })
         .then(function () {
             console.log("Data Saved!");
