@@ -22,7 +22,7 @@ firestore
     .then(function (doc) {
         if (doc.exists) {
             document.getElementById("formDiv").style.visibility = "visible";
-            console.log(doc.data().ProductName);
+            //console.log(doc.data().ProductName);
             document.getElementById(
                 "productName"
             ).value = doc.data().ProductName;
@@ -30,3 +30,29 @@ firestore
             document.getElementById("code").value = doc.data().Code;
         }
     });
+
+const productName = document.querySelector("#productName");
+const price = document.querySelector("#price");
+
+const submitBtn = document.querySelector("#submitBtn");
+
+console.log(code);
+
+submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    firestore
+        .collection("products")
+        .doc(code)
+        .update({
+            ProductName: productName.value,
+            Price: price.value,
+            Code: code,
+        })
+        .then(function () {
+            console.log("Data Saved!");
+        })
+        .catch(function (error) {
+            console.log("Got an error ", error);
+        });
+});
