@@ -1,5 +1,5 @@
 //Firebase Configuration
-import { firebaseConfig } from "/Config/FirebaseConfig.js";
+import { firebaseConfig } from "./../Config/FirebaseConfig.js";
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -113,7 +113,7 @@ submitBtn.addEventListener("click", (e) => {
         };
         const task = ref.child(fileName).put(file, metadata);
         task.then((snapshot) => snapshot.ref.getDownloadURL()).then((url) => {
-            storageImageUrl = url;
+            //storageImageUrl = url;
             console.log(storageImageUrl);
             alert("Image Upload Successful");
             updateImageToFirestore(url);
@@ -160,7 +160,7 @@ function updateToFirestore() {
         .collection("Products")
         .doc(code)
         .update({
-            storageImageUrl: "",
+            //storageImageUrl: "",
             imageUrl: imageUrl.value,
             productCode: productCode.value,
             productName: productName.value,

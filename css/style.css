@@ -53,9 +53,11 @@ ul li {
 }
 .btn-secondary {
     background-color: #ff641a;
+    border: none;
 }
 .btn-primary {
     background-color: #ff641a;
+    border: none;
 }
 .btn-secondary:hover {
     background-color: #ff9f00;
@@ -65,6 +67,7 @@ ul li {
 }
 .btn-info {
     background-color: #ff641a;
+    border: none;
 }
 .btn-info:hover {
     background-color: #ff9f00;
