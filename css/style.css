@@ -11,14 +11,114 @@ ul li {
 }
 
 .card {
-    margin: 20px 20px;
-    padding: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 10px 10px;
+    background-color: #ededed;
+    -webkit-box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
+    box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
 }
 
 .card-image {
     margin: 0px auto;
+    object-fit: cover;
 }
 
+.card h4 {
+    margin-top: 35px;
+    height: 70px;
+}
+
+.grid-container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+}
+
+#searchProducts {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px 20px;
+}
+
+.container {
+    width: 75%;
+}
 .btn {
     margin: 10px 20px;
+}
+.btn-secondary {
+    background-color: #ff641a;
+}
+.btn-primary {
+    background-color: #ff641a;
+}
+.btn-secondary:hover {
+    background-color: #ff9f00;
+}
+.btn-primary:hover {
+    background-color: #ff9f00;
+}
+.btn-info {
+    background-color: #ff641a;
+}
+.btn-info:hover {
+    background-color: #ff9f00;
+}
+.center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-input {
+    width: 300px;
+    padding: 20px;
+    background: #fff;
+    border: 2px dashed #555;
+    margin-bottom: 20px;
+}
+
+.form-input input {
+    display: none;
+}
+.form-input label {
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: #ff641a;
+    color: #fff;
+    font-size: 15px;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    font-weight: 600px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.form-input img {
+    width: 100%;
+    display: none;
+    margin-top: 50px;
+}
+
+.updateDiv {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+#submitBtn {
+    margin-left: auto;
+    margin-right: auto;
+}
+#addPriceBtn {
+    margin: 0px auto;
 }

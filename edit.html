@@ -19,10 +19,46 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <h1>Edit Product Info</h1>
+        <h1 class="text-center pt-4">Edit Product Info</h1>
 
         <div class="container" id="formDiv">
             <div class="container" id="dataForm">
+                <div class="center">
+                    <div class="form-input">
+                        <label for="file-ip-1">Upload Image</label>
+                        <input
+                            type="file"
+                            id="file-ip-1"
+                            accept="image/*"
+                            onchange="showPreview(event);"
+                        />
+                        <div class="preview">
+                            <img id="file-ip-1-preview" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Image URL Link</label>
+                    <input
+                        type="text"
+                        name="imageUrl"
+                        class="form-control"
+                        id="imageUrl"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="code">Prduct Code</label>
+                    <input
+                        type="number"
+                        name="code"
+                        class="form-control"
+                        id="code"
+                        required
+                        readonly
+                    />
+                </div>
                 <div class="form-group">
                     <label for="productName">Product Name</label>
                     <input
@@ -34,35 +70,104 @@
                     />
                 </div>
                 <div class="form-group">
-                    <label for="price">Category</label>
+                    <label for="category">Category</label>
                     <input
                         type="text"
-                        name="price"
+                        name="category"
                         class="form-control"
-                        id="price"
+                        id="category"
                         required
                     />
                 </div>
                 <div class="form-group">
-                    <label for="code">Code</label>
+                    <label for="productType">Product Type</label>
                     <input
-                        type="number"
-                        name="code"
+                        type="text"
+                        name="productType"
                         class="form-control"
-                        id="code"
+                        id="productType"
                         required
-                        readonly
                     />
                 </div>
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                    Submit
-                </button>
+                <div class="form-group">
+                    <label for="bottomMessage">Message</label>
+                    <input
+                        type="text"
+                        name="bottomMessage"
+                        class="form-control"
+                        id="bottomMessage"
+                    />
+                </div>
+                <center>
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="submitBtn"
+                    >
+                        Update
+                    </button>
+                </center>
+                <div class="priceTable">
+                    <table class="table table-striped">
+                        <tr class="bg-info">
+                            <th style="text-align: center; color: #fff;">
+                                Date
+                            </th>
+                            <th style="text-align: center; color: #fff;">
+                                Price
+                            </th>
+                        </tr>
+                        <tbody id="myTable"></tbody>
+                    </table>
+                </div>
+                <div class="updateDiv">
+                    <div class="form-group">
+                        <label for="updatedPrice">Updated Price</label>
+                        <input
+                            type="number"
+                            name="updatedPrice"
+                            class="form-control"
+                            id="updatedPrice"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedDate">Updated Date</label>
+                        <input
+                            type="text"
+                            name="updatedDate"
+                            class="form-control"
+                            id="updatedDate"
+                            required
+                        />
+                    </div>
+                </div>
+                <center>
+                    <button
+                        type="submit"
+                        class="btn btn-info mb-5"
+                        id="addPriceBtn"
+                    >
+                        Add Price and Date
+                    </button>
+                </center>
             </div>
         </div>
-        <script></script>
+        <script>
+            function showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    console.log(src);
+                    preview.style.display = "block";
+                }
+            }
+        </script>
 
         <!-- firebase SDK -->
         <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
         <script type="module" src="Config/FirebaseConfig.js"></script>

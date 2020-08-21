@@ -73,9 +73,9 @@ document.getElementById("button").addEventListener("click", () => {
                     .collection("Products")
                     .doc(code)
                     .set({
-                        storageImageURL: "",
-                        imageURL: "",
-                        productCode: myArray[i].Code,
+                        storageImageUrl: "",
+                        imageUrl: "",
+                        productCode: code,
                         productName: myArray[i].Title,
                         dateList: dateList,
                         priceList: priceList,
@@ -122,7 +122,7 @@ submitBtn.addEventListener("click", (e) => {
     price.value = "";
     code.value = "";
 });
-const productList = document.querySelector("#productList");
+
 
 function editFunction() {
     var getCode = prompt("Type the product code: ");
@@ -130,32 +130,33 @@ function editFunction() {
     console.log("Edit Button Clicked");
 }
 */
-
+const productList = document.querySelector("#productList");
 // Product List Display
 function renderProductList(doc) {
-    let li = document.createElement("li");
+    //let li = document.createElement("li");
     let content = document.createElement("div");
     let span = document.createElement("span");
 
-    var codeToPass;
-    li.setAttribute("data-id", doc.id);
-    var image = document.createElement("img");
-    image.src = "./../images/default.jpg";
-    span.appendChild(image);
-    //var imageURL = "./../images/default.jpg";
-    var imageURL =
-        "https://www.bandg.com/assets/img/default-product-img.png?w=400&h=225&scale=both&mode=max";
+    if (doc.data().imageUrl != "") {
+        imageUrl = doc.data().imageUrl;
+    } else if (doc.data().storageImageUrl != "") {
+        imageUrl = doc.data().storageImageUrl;
+    } else {
+        var imageUrl =
+            "https://firebasestorage.googleapis.com/v0/b/prizer-kuwait.appspot.com/o/no-image.jpg?alt=media&token=de46086b-4c2d-4311-bbad-89ee438727c9";
+    }
+
     content.innerHTML +=
         `<div class="card" style="width: 24rem;">
-        <img class="card-image" src=${imageURL} width="200" height="150">
-        <h3 class="text-center">` +
+        <img class="card-image" src=${imageUrl} width="290" height="200">
+        <h4 class="text-center" id="productName">` +
         doc.data().productName +
-        `</h3>
+        `</h4>
 
-    <p class="text-center">` +
+    <p class="text-center"> Category: ` +
         doc.data().category +
         `</p>
-    <p class="text-center"> ` +
+    <p class="text-center"> Code: ` +
         doc.data().productCode +
         `</p>
         <a href="edit.html" onclick="editFunction(${
@@ -165,9 +166,9 @@ function renderProductList(doc) {
         <a href="#" class="btn btn-danger ">Delete</a>
 </div> `;
 
-    li.appendChild(content);
+    //li.appendChild(content);
 
-    productList.appendChild(li);
+    productList.appendChild(content);
 }
 
 //Real Time Data Fetching
@@ -178,6 +179,20 @@ firestore.collection("Products").onSnapshot((snapshot) => {
         //console.log(change.doc.data());
         if (change.type === "added") {
             renderProductList(change.doc);
+        }
+    });
+});
+
+const searchBar = document.querySelector("#searchProducts");
+searchBar.addEventListener("keyup", function (e) {
+    const term = e.target.value.toLowerCase();
+    const products = productList.getElementsByTagName("div");
+    Array.from(products).forEach(function (product) {
+        var a = product.getElementsByTagName("h4")[0];
+        if (a.innerHTML.toLowerCase().indexOf(term) != -1) {
+            product.style.display = "grid";
+        } else {
+            product.style.display = "none";
         }
     });
 });

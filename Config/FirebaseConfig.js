@@ -1,12 +1,12 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyDVHq2D53VhkLg-oMmZWGYLns9FGlCS8AQ",
-    authDomain: "e-commerce-app-admin-panel.firebaseapp.com",
-    databaseURL: "https://e-commerce-app-admin-panel.firebaseio.com",
-    projectId: "e-commerce-app-admin-panel",
-    storageBucket: "e-commerce-app-admin-panel.appspot.com",
-    messagingSenderId: "502315982354",
-    appId: "1:502315982354:web:e3fecf3e977e67ce18c2cb",
-    measurementId: "G-838MXBKTS6",
+    apiKey: "AIzaSyDb8cDCytuZj5y9K4vtDWk-yvwFjbCSp6o",
+    authDomain: "prizer-kuwait.firebaseapp.com",
+    databaseURL: "https://prizer-kuwait.firebaseio.com",
+    projectId: "prizer-kuwait",
+    storageBucket: "prizer-kuwait.appspot.com",
+    messagingSenderId: "465984032716",
+    appId: "1:465984032716:web:56d1603f802833cfb31769",
+    measurementId: "G-9DM0TYPBJD",
 };
 
 export { firebaseConfig };
