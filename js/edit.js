@@ -77,9 +77,11 @@ firestore
 function buildTable(priceArray, dateArray) {
     var table = document.getElementById("myTable");
     for (var i = 0; i < priceArray.length; i++) {
+        var price = Number(priceArray[i]);
+        var priceFloat = price.toFixed(3);
         var row = `<tr>
                         <td style="text-align:center">${dateArray[i]}</td>
-                        <td style="text-align:center">${priceArray[i]}</td>
+                        <td style="text-align:center">${priceFloat} KD</td>
                         <td style="text-align:center"> 
                             <a class="btn btn-sm btn-outline-danger" onclick="onDelete(${i})"> 
                                 Delete 
@@ -131,6 +133,13 @@ submitBtn.addEventListener("click", (e) => {
 });
 const addPriceBtn = document.querySelector("#addPriceBtn");
 addPriceBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (Number(updatedPrice.value) != 0)
+        priceListArray.push(Number(updatedPrice.value));
+
+    if (updatedDate.value !== "") dateListArray.push(updatedDate.value);
+    updatePriceToFirestore();
+
     //confirmation message
     Swal.fire({
         icon: "success",
@@ -140,12 +149,6 @@ addPriceBtn.addEventListener("click", (e) => {
     }).then((result) => {
         location.reload();
     });
-    e.preventDefault();
-    if (Number(updatedPrice.value) != 0)
-        priceListArray.push(Number(updatedPrice.value));
-
-    if (updatedDate.value !== "") dateListArray.push(updatedDate.value);
-    updatePriceToFirestore();
 });
 function updateImageToFirestore(url) {
     console.log(url);
