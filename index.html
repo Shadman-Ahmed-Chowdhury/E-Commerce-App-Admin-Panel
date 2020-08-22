@@ -26,58 +26,92 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <nav class="navbar navbar-custom navbar-expand-lg navbar-inverse mb-5">
-            <div class="container">
-                <!--Navbar Title-->
-                <a href="index.html" class="navbar-brand"
-                    ><img
-                        src="images/logo_2.png"
-                        width="30"
-                        height="30"
-                        class="d-inline-block align-top"
-                        alt=""
-                    />
-                    Prizer Kuwait Admin Panel</a
-                >
+        <script type="module">
+            Swal.fire({
+                title: "Enter your Admin Password",
+                input: "text",
+                inputAttributes: {
+                    autocapitalize: "off",
+                },
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                    if (login == "prizer753") {
+                        document.getElementById("wrapper").style.visibility =
+                            "visible";
+                        //window.location.href = "index.html";
+                    } else {
+                        document.getElementById("wrapper").style.visibility =
+                            "hidden";
+                        Swal.fire(
+                            "Wrong password",
+                            "Reload the page and enter password correctly!"
+                        );
 
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </nav>
+                        window.location.href = "index.html";
+                    }
+                },
+                allowOutsideClick: () => !Swal.isLoading(),
+            });
+        </script>
+        <div id="wrapper">
+            <nav
+                class="navbar navbar-custom navbar-expand-lg navbar-inverse mb-5"
+            >
+                <div class="container">
+                    <!--Navbar Title-->
+                    <a href="index.html" class="navbar-brand"
+                        ><img
+                            src="images/logo_2.png"
+                            width="30"
+                            height="30"
+                            class="d-inline-block align-top"
+                            alt=""
+                        />
+                        Prizer Kuwait Admin Panel</a
+                    >
 
-        <div class="container mt-5">
-            <div class="input-file">
-                <div class="file">
-                    <input
-                        type="file"
-                        class="form-control"
-                        name=""
-                        id="input"
-                        accept=".xls, .xlsx"
-                    />
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                 </div>
-                <div class="converBtn">
-                    <button class="btn btn-primary" id="button">Convert</button>
-                </div>
-            </div>
+            </nav>
 
-            <!--  
+            <div class="container mt-5">
+                <div class="input-file">
+                    <div class="file">
+                        <input
+                            type="file"
+                            class="form-control"
+                            name=""
+                            id="input"
+                            accept=".xls, .xlsx"
+                        />
+                    </div>
+                    <div class="converBtn">
+                        <button class="btn btn-primary" id="button">
+                            Convert
+                        </button>
+                    </div>
+                </div>
+
+                <!--  
                 <div class="col-md-12">
                     <pre id="jsondata"></pre>
                 </div> -->
-        </div>
+            </div>
 
-        <!-- Form for manual data entry -->
-        <!-- 
+            <!-- Form for manual data entry -->
+            <!-- 
         <div class="container">
             <div class="container" id="dataForm">
                 <div class="form-group">
@@ -116,14 +150,15 @@
             </div>
         </div>
     -->
-        <div class="container">
-            <input
-                type="text"
-                placeholder="Search products..."
-                id="searchProducts"
-                class="form-control"
-            />
-            <div class="grid-container" id="productList"></div>
+            <div class="container">
+                <input
+                    type="text"
+                    placeholder="Search products..."
+                    id="searchProducts"
+                    class="form-control"
+                />
+                <div class="grid-container" id="productList"></div>
+            </div>
         </div>
 
         <!-- firebase SDK -->
