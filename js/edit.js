@@ -19,6 +19,7 @@ const code = tempCode.toString(10);
 var priceListArray = [];
 var dateListArray = [];
 //console.log(code);
+
 firestore
     .collection("Products")
     .doc(code)
@@ -79,6 +80,11 @@ function buildTable(priceArray, dateArray) {
         var row = `<tr>
                         <td style="text-align:center">${dateArray[i]}</td>
                         <td style="text-align:center">${priceArray[i]}</td>
+                        <td style="text-align:center"> 
+                            <a class="btn btn-sm btn-outline-danger" onclick="onDelete(${i})"> 
+                                Delete 
+                            </a> 
+                        </td>
                    </tr>`;
         table.innerHTML += row;
     }

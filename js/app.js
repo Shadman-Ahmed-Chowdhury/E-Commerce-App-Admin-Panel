@@ -148,7 +148,7 @@ function renderProductList(doc) {
 
     content.innerHTML +=
         `<div class="card" style="width: 24rem;">
-        <img class="card-image" src=${imageUrl} width="290" height="200">
+        <img class="card-image" src=${imageUrl} >
         <h4 class="text-center" id="productName">` +
         doc.data().productName +
         `</h4>
