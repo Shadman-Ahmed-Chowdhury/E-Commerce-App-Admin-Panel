@@ -46,10 +46,6 @@ firestore
                 preview.src = src;
                 console.log(src);
                 preview.style.display = "block";
-                var preview = document.getElementById("file-ip-1-preview");
-                preview.src = src;
-                console.log(src);
-                preview.style.display = "block";
             }
             document.getElementById("imageUrl").value = doc.data().imageUrl;
             document.getElementById("code").value = doc.data().productCode;
@@ -97,8 +93,17 @@ const updatedDate = document.querySelector("#updatedDate");
 const updatedPrice = document.querySelector("#updatedPrice");
 
 const submitBtn = document.querySelector("#submitBtn");
-var storageImageUrl = "";
+
 submitBtn.addEventListener("click", (e) => {
+    //confirmation message
+    Swal.fire({
+        icon: "success",
+        title: "Successfully edited",
+        showConfirmButton: false,
+        timer: 2000,
+    }).then((result) => {
+        location.reload();
+    });
     e.preventDefault();
 
     const ref = firebase.storage().ref();
@@ -113,8 +118,6 @@ submitBtn.addEventListener("click", (e) => {
         };
         const task = ref.child(fileName).put(file, metadata);
         task.then((snapshot) => snapshot.ref.getDownloadURL()).then((url) => {
-            //storageImageUrl = url;
-            console.log(storageImageUrl);
             alert("Image Upload Successful");
             updateImageToFirestore(url);
         });
@@ -128,6 +131,15 @@ submitBtn.addEventListener("click", (e) => {
 });
 const addPriceBtn = document.querySelector("#addPriceBtn");
 addPriceBtn.addEventListener("click", (e) => {
+    //confirmation message
+    Swal.fire({
+        icon: "success",
+        title: "Successfully edited",
+        showConfirmButton: false,
+        timer: 2000,
+    }).then((result) => {
+        location.reload();
+    });
     e.preventDefault();
     if (Number(updatedPrice.value) != 0)
         priceListArray.push(Number(updatedPrice.value));

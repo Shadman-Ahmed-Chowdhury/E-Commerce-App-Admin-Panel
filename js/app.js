@@ -163,7 +163,9 @@ function renderProductList(doc) {
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
         
-        <a href="#" class="btn btn-danger ">Delete</a>
+        <a href="delete.html" class="btn btn-danger" onclick="deleteFunction(${
+            doc.data().productCode
+        })">Delete</a>
 </div> `;
 
     //li.appendChild(content);
