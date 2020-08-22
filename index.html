@@ -126,7 +126,28 @@
             <div class="grid-container" id="productList"></div>
         </div>
 
+        <!-- firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+        <script type="module" src="Config/FirebaseConfig.js"></script>
+
+        <!-- sweetalert2 CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
         <script>
+            var firebaseConfig = {
+                apiKey: "AIzaSyDb8cDCytuZj5y9K4vtDWk-yvwFjbCSp6o",
+                authDomain: "prizer-kuwait.firebaseapp.com",
+                databaseURL: "https://prizer-kuwait.firebaseio.com",
+                projectId: "prizer-kuwait",
+                storageBucket: "prizer-kuwait.appspot.com",
+                messagingSenderId: "465984032716",
+                appId: "1:465984032716:web:56d1603f802833cfb31769",
+                measurementId: "G-9DM0TYPBJD",
+            };
+
             //Function on click EDIT Button
             function editFunction(code) {
                 //var getCode = prompt("Type the product code: ");
@@ -134,20 +155,59 @@
                 console.log("Edit Button Clicked");
                 console.log(code);
             }
-            function deleteFunction(code) {
-                localStorage.setItem("storageName", code);
-                console.log(code);
+
+            function deleteFunction(tempCode) {
+                var code = tempCode.toString(10);
+                var firestore = firebase.firestore();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#01D307",
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.value) {
+                        // Deleting from database
+                        firestore
+                            .collection("Products")
+                            .doc(code)
+                            .delete()
+                            .then(function () {
+                                //confirmation message
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Successfully deleted",
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                });
+                                location.reload();
+                            })
+                            .catch(function (error) {
+                                console.error(
+                                    "Error removing document: ",
+                                    error
+                                );
+                            });
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        //confirmation message
+                        Swal.fire({
+                            icon: "error",
+                            title: "Cancelled!",
+                            text: "Your imaginary file is safe :)",
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
+                });
             }
         </script>
-
-        <!-- firebase SDK -->
-        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
-        <script type="module" src="Config/FirebaseConfig.js"></script>
-
-        <!-- sweetalert2 CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
         <!-- javascript file -->
         <script type="module" src="js/app.js"></script>

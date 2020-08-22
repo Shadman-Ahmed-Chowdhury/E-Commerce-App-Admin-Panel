@@ -2,6 +2,7 @@
 import { firebaseConfig } from "./../Config/FirebaseConfig.js";
 
 // Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
@@ -95,15 +96,6 @@ const updatedPrice = document.querySelector("#updatedPrice");
 const submitBtn = document.querySelector("#submitBtn");
 
 submitBtn.addEventListener("click", (e) => {
-    //confirmation message
-    Swal.fire({
-        icon: "success",
-        title: "Successfully edited",
-        showConfirmButton: false,
-        timer: 2000,
-    }).then((result) => {
-        location.reload();
-    });
     e.preventDefault();
 
     const ref = firebase.storage().ref();
@@ -118,10 +110,12 @@ submitBtn.addEventListener("click", (e) => {
         };
         const task = ref.child(fileName).put(file, metadata);
         task.then((snapshot) => snapshot.ref.getDownloadURL()).then((url) => {
-            alert("Image Upload Successful");
+            //alert("Image Upload Successful");
+            console.log("update image to firestore");
             updateImageToFirestore(url);
         });
     } else {
+        console.log("update to firestore called");
         updateToFirestore();
     }
 
@@ -148,6 +142,7 @@ addPriceBtn.addEventListener("click", (e) => {
     updatePriceToFirestore();
 });
 function updateImageToFirestore(url) {
+    console.log(url);
     firestore
         .collection("Products")
         .doc(code)
@@ -162,6 +157,15 @@ function updateImageToFirestore(url) {
         })
         .then(function () {
             console.log("Data Saved!");
+            //confirmation message
+            Swal.fire({
+                icon: "success",
+                title: "Successfully edited",
+                showConfirmButton: false,
+                timer: 2000,
+            }).then((result) => {
+                location.reload();
+            });
         })
         .catch(function (error) {
             console.log("Got an error ", error);
@@ -182,6 +186,15 @@ function updateToFirestore() {
         })
         .then(function () {
             console.log("Data Saved!");
+            //confirmation message
+            Swal.fire({
+                icon: "success",
+                title: "Successfully edited",
+                showConfirmButton: false,
+                timer: 2000,
+            }).then((result) => {
+                location.reload();
+            });
         })
         .catch(function (error) {
             console.log("Got an error ", error);
@@ -197,6 +210,15 @@ function updatePriceToFirestore(url) {
         })
         .then(function () {
             console.log("Data Saved!");
+            //confirmation message
+            Swal.fire({
+                icon: "success",
+                title: "Successfully edited",
+                showConfirmButton: false,
+                timer: 2000,
+            }).then((result) => {
+                location.reload();
+            });
         })
         .catch(function (error) {
             console.log("Got an error ", error);
