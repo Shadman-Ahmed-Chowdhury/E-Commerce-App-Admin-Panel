@@ -1,3 +1,21 @@
+nav {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    height: 80px;
+}
+.navbar-custom {
+    background-color: #ededed;
+    -webkit-box-shadow: -16px 23px 21px -21px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow: -16px 23px 21px -21px rgba(0, 0, 0, 0.46);
+    box-shadow: -16px 23px 21px -21px rgba(0, 0, 0, 0.46);
+}
+nav .navbar-brand {
+    font-weight: 500;
+}
+a {
+    color: black !important;
+}
+
 .input-file {
     text-align: center;
     display: grid;
