@@ -85,6 +85,14 @@ document.getElementById("button").addEventListener("click", () => {
                     })
                     .then(function () {
                         console.log("Data Saved!");
+                        Swal.fire({
+                            icon: "success",
+                            title: "Successfully Uploaded",
+                            showConfirmButton: false,
+                            timer: 3000,
+                        }).then((result) => {
+                            location.reload();
+                        });
                     })
                     .catch(function (error) {
                         console.log("Got an error ", error);

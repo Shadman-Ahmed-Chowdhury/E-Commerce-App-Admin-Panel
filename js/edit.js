@@ -145,7 +145,7 @@ addPriceBtn.addEventListener("click", (e) => {
         icon: "success",
         title: "Successfully edited",
         showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
     }).then((result) => {
         location.reload();
     });
@@ -171,7 +171,7 @@ function updateImageToFirestore(url) {
                 icon: "success",
                 title: "Successfully edited",
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 3000,
             }).then((result) => {
                 location.reload();
             });
@@ -200,7 +200,7 @@ function updateToFirestore() {
                 icon: "success",
                 title: "Successfully edited",
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 3000,
             }).then((result) => {
                 location.reload();
             });
