@@ -57,13 +57,21 @@ document.getElementById("button").addEventListener("click", () => {
                 priceList.push(myArray[i].Price);
                 var dateList = [];
                 const d = myArray[i].Date;
+                //alert(d);
                 //console.log(d);
-                let dateObj = new Date((d - 25569) * 86400 * 1000);
+                var dateObj = new Date(1900, 0, 0);
+                dateObj.setDate(dateObj.getDate() - 1 + d);
+                console.log(dateObj);
+
+                //var utc_days = Math.ceil(d - 25569);
+                //var utc_value = utc_days * 86400;
+                //var dateObj = new Date(utc_value * 1000);
                 let m = dateObj.getMonth();
                 let month = monthList[m];
                 let y = dateObj.getFullYear().toString();
-                let year = y.slice(-2);
-                let day = dateObj.getDay();
+                let year = y.substring(y.length - 2, y.length);
+                let day = dateObj.getDate();
+                console.log(day);
 
                 let date = day + "-" + month + "-" + year;
                 dateList.push(date);
@@ -85,18 +93,18 @@ document.getElementById("button").addEventListener("click", () => {
                     })
                     .then(function () {
                         console.log("Data Saved!");
-                        Swal.fire({
-                            icon: "success",
-                            title: "Successfully Uploaded",
-                            showConfirmButton: false,
-                            timer: 3000,
-                        }).then((result) => {
-                            location.reload();
-                        });
                     })
                     .catch(function (error) {
                         console.log("Got an error ", error);
                     });
+                Swal.fire({
+                    icon: "success",
+                    title: "Successfully Uploaded",
+                    showConfirmButton: false,
+                    timer: 3000,
+                }).then((result) => {
+                    location.reload();
+                });
             }
         };
     }
