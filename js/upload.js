@@ -102,7 +102,7 @@ function updateToFirestore(code, priceArray, dateArray) {
             productType: productType.value,
             bottomMessage: bottomMessage.value,
             priceList: priceArray,
-            dateListArray: dateArray,
+            dateList: dateArray,
         })
         .then(function () {
             console.log("Data Saved!");
