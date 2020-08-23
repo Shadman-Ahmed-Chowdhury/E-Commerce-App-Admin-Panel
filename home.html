@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>E-Commerce App Admin Panel</title>
+        <title>Prizer Kuwait Admin</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/png" href="images/logo_2.png" />
@@ -32,7 +32,7 @@
             >
                 <div class="container">
                     <!--Navbar Title-->
-                    <a href="index.html" class="navbar-brand"
+                    <a href="home.html" class="navbar-brand"
                         ><img
                             src="images/logo_2.png"
                             width="30"
@@ -71,6 +71,12 @@
                     <div class="converBtn">
                         <button class="btn btn-primary" id="button">
                             Convert
+                        </button>
+                    </div>
+                    OR
+                    <div class="uploadProducts">
+                        <button class="btn btn-primary" id="uploadBtn">
+                            Upload Product Manually
                         </button>
                     </div>
                 </div>
@@ -188,7 +194,7 @@
                                     icon: "success",
                                     title: "Successfully deleted",
                                     showConfirmButton: false,
-                                    timer: 2000,
+                                    timer: 3000,
                                 });
                                 location.reload();
                             })

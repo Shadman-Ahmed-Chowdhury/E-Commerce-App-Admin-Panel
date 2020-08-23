@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Prizer Kuwait - Edit Product Info</title>
+        <title>Prizer Kuwait - Upload Products</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/png" href="images/logo_2.png" />
@@ -23,7 +23,6 @@
 
         <!-- xlsx CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.5/xlsx.full.min.js"></script>
-
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
@@ -89,8 +88,10 @@
                         class="form-control"
                         id="code"
                         required
-                        readonly
                     />
+                    <small id="productCodeHelp" class="form-text text-muted"
+                        >Product code can't be change later!</small
+                    >
                 </div>
                 <div class="form-group">
                     <label for="productName">Product Name</label>
@@ -122,6 +123,30 @@
                         required
                     />
                 </div>
+
+                <div class="updateDiv">
+                    <div class="form-group">
+                        <label for="updatedPrice">Price</label>
+                        <input
+                            type="number"
+                            name="updatedPrice"
+                            class="form-control"
+                            id="updatedPrice"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedDate">Date</label>
+                        <input
+                            type="text"
+                            name="updatedDate"
+                            class="form-control"
+                            id="updatedDate"
+                            placeholder="eg. 21-Aug-20"
+                            required
+                        />
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="bottomMessage">Message(Optional)</label>
                     <textarea
@@ -136,55 +161,10 @@
                 <center>
                     <button
                         type="submit"
-                        class="btn btn-primary"
+                        class="btn btn-info mb-5"
                         id="submitBtn"
                     >
-                        Update
-                    </button>
-                </center>
-                <div class="priceTable">
-                    <table class="table table-striped" id="tableId">
-                        <tr class="bg-info">
-                            <th style="text-align: center; color: #fff;">
-                                Date
-                            </th>
-                            <th style="text-align: center; color: #fff;">
-                                Price
-                            </th>
-                            <th></th>
-                        </tr>
-                        <tbody id="myTable"></tbody>
-                    </table>
-                </div>
-                <div class="updateDiv">
-                    <div class="form-group">
-                        <label for="updatedPrice">Updated Price</label>
-                        <input
-                            type="number"
-                            name="updatedPrice"
-                            class="form-control"
-                            id="updatedPrice"
-                            required
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="updatedDate">Updated Date</label>
-                        <input
-                            type="text"
-                            name="updatedDate"
-                            class="form-control"
-                            id="updatedDate"
-                            required
-                        />
-                    </div>
-                </div>
-                <center>
-                    <button
-                        type="submit"
-                        class="btn btn-info mb-5"
-                        id="addPriceBtn"
-                    >
-                        Add Price and Date
+                        Add Product
                     </button>
                 </center>
             </div>
@@ -196,20 +176,8 @@
         <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
         <script type="module" src="Config/FirebaseConfig.js"></script>
-        <!-- sweetalert2 CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
         <script>
-            var firebaseConfig = {
-                apiKey: "AIzaSyDb8cDCytuZj5y9K4vtDWk-yvwFjbCSp6o",
-                authDomain: "prizer-kuwait.firebaseapp.com",
-                databaseURL: "https://prizer-kuwait.firebaseio.com",
-                projectId: "prizer-kuwait",
-                storageBucket: "prizer-kuwait.appspot.com",
-                messagingSenderId: "465984032716",
-                appId: "1:465984032716:web:56d1603f802833cfb31769",
-                measurementId: "G-9DM0TYPBJD",
-            };
             function showPreview(event) {
                 if (event.target.files.length > 0) {
                     var src = URL.createObjectURL(event.target.files[0]);
@@ -219,69 +187,9 @@
                     preview.style.display = "block";
                 }
             }
-            var priceListArray = [];
-            var dateListArray = [];
-            function onDelete(td) {
-                console.log(td);
-
-                document.getElementById("tableId").deleteRow(td + 1);
-                console.log(td);
-                var firestore = firebase.firestore();
-
-                const tempCode = localStorage.getItem("storageName");
-                const code = tempCode.toString(10);
-                console.log(code);
-
-                firestore
-                    .collection("Products")
-                    .doc(code)
-                    .get()
-                    .then(function (doc) {
-                        if (doc.exists) {
-                            //Retriving the priceList and dateList
-                            priceListArray = doc.data().priceList;
-                            dateListArray = doc.data().dateList;
-
-                            priceListArray.splice(td, 1);
-                            dateListArray.splice(td, 1);
-                            console.log(priceListArray);
-                            console.log(dateListArray);
-                            updateToFirestore(priceListArray, dateListArray);
-                            //buildTable(priceListArray, dateListArray);
-                        }
-                    });
-            }
-            function updateToFirestore(priceListArray, dateListArray) {
-                var firestore = firebase.firestore();
-
-                const tempCode = localStorage.getItem("storageName");
-                const code = tempCode.toString(10);
-                console.log(code);
-                firestore
-                    .collection("Products")
-                    .doc(code)
-                    .update({
-                        priceList: priceListArray,
-                        dateList: dateListArray,
-                    })
-                    .then(function () {
-                        console.log("Data Saved!");
-                        //confirmation message
-                        Swal.fire({
-                            icon: "success",
-                            title: "Successfully edited",
-                            showConfirmButton: false,
-                            timer: 2000,
-                        }).then((result) => {
-                            location.reload();
-                        });
-                    })
-                    .catch(function (error) {
-                        console.log("Got an error ", error);
-                    });
-            }
         </script>
-
-        <script type="module" src="js/edit.js"></script>
+        <!-- sweetalert2 CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script type="module" src="js/upload.js"></script>
     </body>
 </html>

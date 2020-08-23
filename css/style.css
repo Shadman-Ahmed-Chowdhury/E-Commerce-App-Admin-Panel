@@ -65,6 +65,11 @@ ul li {
     padding: 20px 20px;
 }
 
+#dataForm {
+    border: 2px solid #ededed;
+    padding: 40px 40px;
+}
+
 .container {
     width: 75%;
 }
@@ -77,14 +82,16 @@ ul li {
 }
 .btn-primary {
     background-color: #ff641a;
+    color: #fff;
     border: none;
-}
-.btn-secondary:hover {
-    background-color: #ff9f00;
 }
 .btn-primary:hover {
     background-color: #ff9f00;
 }
+.btn-secondary:hover {
+    background-color: #ff9f00;
+}
+
 .btn-info {
     background-color: #ff641a;
     border: none;

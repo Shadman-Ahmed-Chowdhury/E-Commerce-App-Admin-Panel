@@ -83,9 +83,9 @@ function buildTable(priceArray, dateArray) {
                         <td style="text-align:center">${dateArray[i]}</td>
                         <td style="text-align:center">${priceFloat} KD</td>
                         <td style="text-align:center"> 
-                            <a class="btn btn-sm btn-outline-danger" onclick="onDelete(${i})"> 
+                            <button class="btn btn-sm btn-outline-danger" onclick="onDelete(${i})"> 
                                 Delete 
-                            </a> 
+                            </button> 
                         </td>
                    </tr>`;
         table.innerHTML += row;

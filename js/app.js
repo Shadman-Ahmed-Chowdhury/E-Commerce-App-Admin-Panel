@@ -106,6 +106,10 @@ document.getElementById("button").addEventListener("click", () => {
     }
 });
 
+document.getElementById("uploadBtn").addEventListener("click", (e) => {
+    window.location.href = "upload.html";
+});
+
 //Saving Data from the form manually
 /*
 const productName = document.querySelector("#productName");
