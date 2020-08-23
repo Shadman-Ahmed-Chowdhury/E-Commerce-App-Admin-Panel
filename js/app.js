@@ -61,17 +61,13 @@ document.getElementById("button").addEventListener("click", () => {
                 //console.log(d);
                 var dateObj = new Date(1900, 0, 0);
                 dateObj.setDate(dateObj.getDate() - 1 + d);
-                console.log(dateObj);
-
-                //var utc_days = Math.ceil(d - 25569);
-                //var utc_value = utc_days * 86400;
-                //var dateObj = new Date(utc_value * 1000);
+                //console.log(dateObj);
                 let m = dateObj.getMonth();
                 let month = monthList[m];
                 let y = dateObj.getFullYear().toString();
                 let year = y.substring(y.length - 2, y.length);
                 let day = dateObj.getDate();
-                console.log(day);
+                //console.log(day);
 
                 let date = day + "-" + month + "-" + year;
                 dateList.push(date);
