@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,user-scalable=yes"
+        />
+        <meta property="og:image" content="images/logo_2.png" />
+        <title>Prizer Kuwait - Upload Products</title>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="images/logo_2.png" />
+
+        <!-- Bootstrap CDN -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+        />
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- xlsx CDN -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.5/xlsx.full.min.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <nav class="navbar navbar-custom navbar-expand-lg navbar-inverse mb-4">
+            <div class="container">
+                <!--Navbar Title-->
+                <a href="home.html" class="navbar-brand"
+                    ><img
+                        src="images/logo_2.png"
+                        width="30"
+                        height="30"
+                        class="d-inline-block align-top"
+                        alt=""
+                    />
+                    Prizer Kuwait Admin Panel</a
+                >
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container" id="formDiv">
+            <div class="container" id="dataForm">
+                <div class="center">
+                    <div class="form-input">
+                        <label for="file-ip-1">Upload Image</label>
+                        <input
+                            type="file"
+                            id="file-ip-1"
+                            accept="image/*"
+                            onchange="showPreview(event);"
+                        />
+                        <div class="preview">
+                            <img id="file-ip-1-preview" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUrl">Image URL Link(Optional)</label>
+                    <input
+                        type="text"
+                        name="imageUrl"
+                        class="form-control"
+                        id="imageUrl"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="code">Prduct Code</label>
+                    <input
+                        type="number"
+                        name="code"
+                        class="form-control"
+                        id="code"
+                        required
+                    />
+                    <small id="productCodeHelp" class="form-text text-muted"
+                        >Product code can't be change later!</small
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="productName">Product Name</label>
+                    <input
+                        type="text"
+                        name="productName"
+                        class="form-control"
+                        id="productName"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <input
+                        type="text"
+                        name="category"
+                        class="form-control"
+                        id="category"
+                        required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="productType">Product Type</label>
+                    <input
+                        type="text"
+                        name="productType"
+                        class="form-control"
+                        id="productType"
+                        required
+                    />
+                </div>
+
+                <div class="updateDiv">
+                    <div class="form-group">
+                        <label for="updatedPrice">Price</label>
+                        <input
+                            type="number"
+                            name="updatedPrice"
+                            class="form-control"
+                            id="updatedPrice"
+                            required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="updatedDate">Date</label>
+                        <input
+                            type="text"
+                            name="updatedDate"
+                            class="form-control"
+                            id="updatedDate"
+                            placeholder="eg. 21-Aug-20"
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bottomMessage">Message(Optional)</label>
+                    <textarea
+                        type="text"
+                        name="bottomMessage"
+                        class="form-control"
+                        id="bottomMessage"
+                        rows="5"
+                    ></textarea>
+                </div>
+                <center>
+                    <button
+                        type="submit"
+                        class="btn btn-info mb-5"
+                        id="submitBtn"
+                    >
+                        Add Product
+                    </button>
+                </center>
+            </div>
+        </div>
+
+        <!-- firebase SDK -->
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.18.0/firebase-analytics.js"></script>
+        <script type="module" src="Config/FirebaseConfig.js"></script>
+
+        <script>
+            function showPreview(event) {
+                if (event.target.files.length > 0) {
+                    var src = URL.createObjectURL(event.target.files[0]);
+                    var preview = document.getElementById("file-ip-1-preview");
+                    preview.src = src;
+                    console.log(src);
+                    preview.style.display = "block";
+                }
+            }
+        </script>
+        <!-- sweetalert2 CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+        <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+        <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+        <script src="/__/firebase/7.19.0/firebase-app.js"></script>
+
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="/__/firebase/7.19.0/firebase-analytics.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="/__/firebase/7.19.0/firebase-auth.js"></script>
+        <script src="/__/firebase/7.19.0/firebase-firestore.js"></script>
+        <script type="module" src="js/upload.js"></script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,user-scalable=yes"
+        />
+        <meta property="og:image" content="images/logo_2.png" />
+
+        <title>Prizer Kuwait Admin</title>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="images/logo_2.png" />
+
+        <!-- sweetalert2 CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    </head>
+    <body>
+        <script type="module">
+            Swal.fire({
+                title: "Enter your Admin Password",
+                input: "text",
+                inputAttributes: {
+                    autocapitalize: "off",
+                },
+                showCancelButton: false,
+                confirmButtonText: "Login",
+                showLoaderOnConfirm: true,
+                allowOutsideClick: false,
+                preConfirm: (login) => {
+                    if (login == "prizer753") {
+                        window.location.href = "home.html";
+                    } else {
+                        Swal.fire(
+                            "Wrong password",
+                            "Reload the page and enter password correctly!"
+                        );
+
+                        //window.location.href = "index.html";
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>
