@@ -7,17 +7,6 @@ import { firebaseConfig } from "./../Config/FirebaseConfig.js";
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-//const { admin } = require("firebase-admin");
-//var admin = require("firebase-admin");
-
-import { createRequire } from "./../module";
-const require = createRequire(import.meta.url);
-
-// sibling-module.js is a CommonJS module.
-const admin = require("./../firebase-admin");
-//import * as admin from "./firebase-admin";
-//const messaging = firebase.messaging();
-
 var firestore = firebase.firestore();
 
 const dataForm = document.querySelector("#dataForm");
@@ -118,7 +107,7 @@ const submitBtn = document.querySelector("#submitBtn");
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const ref = admin.storage().bucket();
+    const ref = firebase.storage().ref();
 
     const file = document.querySelector("#file-ip-1").files[0];
     var fileName;
