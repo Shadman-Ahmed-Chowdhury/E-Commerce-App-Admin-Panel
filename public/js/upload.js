@@ -5,7 +5,7 @@ import { firebaseConfig } from "./../Config/FirebaseConfig.js";
 
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
-
+var admin = require("firebase-admin");
 var firestore = firebase.firestore();
 
 var priceListArray = [];
