@@ -152,6 +152,12 @@ function renderProductList(doc) {
     //let li = document.createElement("li");
     let content = document.createElement("div");
     let span = document.createElement("span");
+    let length = doc.data().priceList.length;
+    let price = doc.data().priceList[length - 1];
+    var priceFloat = price.toFixed(3);
+    let type = doc.data().productType.toLowerCase();
+
+    //console.log(priceFloat);
 
     if (doc.data().imageUrl != "") {
         imageUrl = doc.data().imageUrl;
@@ -161,20 +167,26 @@ function renderProductList(doc) {
         var imageUrl =
             "https://firebasestorage.googleapis.com/v0/b/prizer-kuwait.appspot.com/o/no-image.jpg?alt=media&token=de46086b-4c2d-4311-bbad-89ee438727c9";
     }
-
-    content.innerHTML +=
-        `<div class="card" style="width: 24rem;">
+    if (type === "hot") {
+        content.innerHTML +=
+            `<div class="card" style="width: 24rem;">
         <img class="card-image" src=${imageUrl} >
+        <div class="topright"><img src="images/hot-Sticker.png" width="30"
+        height="30" ></div>
         <h4 class="text-center" id="productName">` +
-        doc.data().productName +
-        `</h4>
+            doc.data().productName +
+            `</h4>
+
+    <p class="text-center price">  
+        ${priceFloat} KD 
+    </p>
 
     <p class="text-center"> Category: ` +
-        doc.data().category +
-        `</p>
+            doc.data().category +
+            `</p>
     <p class="text-center"> Code: ` +
-        doc.data().productCode +
-        `</p>
+            doc.data().productCode +
+            `</p>
         <a href="edit.html" onclick="editFunction(${
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
@@ -183,6 +195,35 @@ function renderProductList(doc) {
             doc.data().productCode
         })">Delete</a>
 </div> `;
+    } else {
+        content.innerHTML +=
+            `<div class="card" style="width: 24rem;">
+        <img class="card-image" src=${imageUrl} >
+        <div class="topright hide-sticker"><img src="images/hot-Sticker.png" width="30"
+        height="30" ></div>
+        <h4 class="text-center" id="productName">` +
+            doc.data().productName +
+            `</h4>
+
+    <p class="text-center price">  
+        ${priceFloat} KD 
+    </p>
+
+    <p class="text-center"> Category: ` +
+            doc.data().category +
+            `</p>
+    <p class="text-center"> Code: ` +
+            doc.data().productCode +
+            `</p>
+        <a href="edit.html" onclick="editFunction(${
+            doc.data().productCode
+        })" class="btn btn-secondary">Edit</a>
+        
+        <a class="btn btn-danger" onclick="deleteFunction(${
+            doc.data().productCode
+        })">Delete</a>
+</div> `;
+    }
 
     //li.appendChild(content);
 
