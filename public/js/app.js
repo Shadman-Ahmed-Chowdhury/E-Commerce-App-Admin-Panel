@@ -173,9 +173,11 @@ function renderProductList(doc) {
         <img class="card-image" src=${imageUrl} >
         <span class="topright"><img src="images/hot-Sticker.png" width="30"
         height="30" ></span>
-        <h4 class="text-center card-header" id="productName">` +
+        <span class="card-header">
+        <h4 class="text-center" id="productName">` +
             doc.data().productName +
             `</h4>
+        </span>
 
     <p class="text-center price">  
         ${priceFloat} KD 
@@ -201,16 +203,21 @@ function renderProductList(doc) {
         <img class="card-image" src=${imageUrl} >
         <span class="topright hide-sticker"><img src="images/hot-Sticker.png" width="30"
         height="30" ></span>
-        <h4 class="text-center card-header" id="productName">` +
+        <span class="card-header">
+        <center> 
+        <h4 class="text-center" id="productName">` +
             doc.data().productName +
             `</h4>
-
+        </center>
+        </span>
     <p class="text-center price">  
         ${priceFloat} KD 
     </p>
 
     <p class="text-center"> Category: ` +
             doc.data().category +
+            `<span class="space"> </span>    Code:  ` +
+            doc.data().productCode +
             `</p>
     <p class="text-center"> Code: ` +
             doc.data().productCode +

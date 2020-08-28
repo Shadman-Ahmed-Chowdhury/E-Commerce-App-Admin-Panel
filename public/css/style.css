@@ -49,13 +49,17 @@ ul li {
     object-fit: cover;
 }
 
-.card h4 {
+.card-header {
     text-align: center;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 20vh;
     font-size: 22px;
     margin-top: 20px;
-    top: 50%;
-    bottom: 50%;
-    height: 120px;
 }
 
 .price {
@@ -68,6 +72,9 @@ ul li {
 }
 p {
     margin-bottom: 2px;
+}
+.space {
+    margin-left: 30px;
 }
 
 .grid-container {
