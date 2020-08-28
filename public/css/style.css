@@ -30,6 +30,7 @@ ul li {
 
 .card {
     position: relative;
+    display: grid;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -49,8 +50,12 @@ ul li {
 }
 
 .card h4 {
-    margin-top: 35px;
-    height: 70px;
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+    top: 50%;
+    bottom: 50%;
+    height: 120px;
 }
 
 .price {
@@ -60,6 +65,9 @@ ul li {
     position: absolute;
     top: 8px;
     right: 8px;
+}
+p {
+    margin-bottom: 2px;
 }
 
 .grid-container {

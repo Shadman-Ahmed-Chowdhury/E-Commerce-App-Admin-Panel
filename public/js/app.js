@@ -171,9 +171,9 @@ function renderProductList(doc) {
         content.innerHTML +=
             `<div class="card" style="width: 24rem;">
         <img class="card-image" src=${imageUrl} >
-        <div class="topright"><img src="images/hot-Sticker.png" width="30"
-        height="30" ></div>
-        <h4 class="text-center" id="productName">` +
+        <span class="topright"><img src="images/hot-Sticker.png" width="30"
+        height="30" ></span>
+        <h4 class="text-center card-header" id="productName">` +
             doc.data().productName +
             `</h4>
 
@@ -199,9 +199,9 @@ function renderProductList(doc) {
         content.innerHTML +=
             `<div class="card" style="width: 24rem;">
         <img class="card-image" src=${imageUrl} >
-        <div class="topright hide-sticker"><img src="images/hot-Sticker.png" width="30"
-        height="30" ></div>
-        <h4 class="text-center" id="productName">` +
+        <span class="topright hide-sticker"><img src="images/hot-Sticker.png" width="30"
+        height="30" ></span>
+        <h4 class="text-center card-header" id="productName">` +
             doc.data().productName +
             `</h4>
 
