@@ -156,6 +156,7 @@ function renderProductList(doc) {
     let price = doc.data().priceList[length - 1];
     var priceFloat = price.toFixed(3);
     let type = doc.data().productType.toLowerCase();
+    let date = doc.data().dateList[length - 1].toString();
 
     //console.log(priceFloat);
 
@@ -179,16 +180,15 @@ function renderProductList(doc) {
             `</h4>
         </span>
 
-    <p class="text-center price">  
-        ${priceFloat} KD 
-    </p>
+        <p class="text-center price">  ${priceFloat} KD [${date}] 
+        </p>
 
     <p class="text-center"> Category: ` +
             doc.data().category +
-            `</p>
-    <p class="text-center"> Code: ` +
+            `<span class="space"> </span>    Code:  ` +
             doc.data().productCode +
             `</p>
+    
         <a href="edit.html" onclick="editFunction(${
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
@@ -210,8 +210,7 @@ function renderProductList(doc) {
             `</h4>
         </center>
         </span>
-    <p class="text-center price">  
-        ${priceFloat} KD 
+    <p class="text-center price">${priceFloat} KD [${date}] 
     </p>
 
     <p class="text-center"> Category: ` +
@@ -219,9 +218,7 @@ function renderProductList(doc) {
             `<span class="space"> </span>    Code:  ` +
             doc.data().productCode +
             `</p>
-    <p class="text-center"> Code: ` +
-            doc.data().productCode +
-            `</p>
+    
         <a href="edit.html" onclick="editFunction(${
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>

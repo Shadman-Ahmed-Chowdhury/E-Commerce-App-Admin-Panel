@@ -1,3 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap");
+body {
+    background-color: #ededed;
+    font-family: "Montserrat", sans-serif;
+}
 nav {
     margin: 0;
     font-family: "Poppins", sans-serif;
@@ -36,7 +41,7 @@ ul li {
     margin-right: auto;
     border-radius: 10px;
     padding: 10px 10px;
-    background-color: #ededed;
+    background-color: #fff;
     -webkit-box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
     -moz-box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
     box-shadow: -20px 18px 21px -9px rgba(0, 0, 0, 0.46);
@@ -50,6 +55,9 @@ ul li {
 }
 
 .card-header {
+    background-color: #fff;
+    font-weight: 600;
+    border: none;
     text-align: center;
     display: flex;
     padding: 0;
@@ -60,6 +68,10 @@ ul li {
     min-height: 20vh;
     font-size: 22px;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+.card-header:hover {
+    color: #ff641a;
 }
 
 .price {
@@ -74,7 +86,8 @@ p {
     margin-bottom: 2px;
 }
 .space {
-    margin-left: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 .grid-container {
