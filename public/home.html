@@ -172,9 +172,12 @@
                 console.log(code);
             }
 
-            function deleteFunction(tempCode) {
+            function deleteFunction(tempCode, imageUrl) {
                 var code = tempCode.toString(10);
+                var delImageUrl = imageUrl.toString();
+                console.log(delImageUrl);
                 var firestore = firebase.firestore();
+
                 Swal.fire({
                     title: "Are you sure?",
                     text: "You won't be able to revert this!",
@@ -199,8 +202,9 @@
                                     title: "Successfully deleted",
                                     showConfirmButton: false,
                                     timer: 3000,
+                                }).then(function () {
+                                    deleteStorageImage(delImageUrl);
                                 });
-                                location.reload();
                             })
                             .catch(function (error) {
                                 console.error(
@@ -222,6 +226,19 @@
                         });
                     }
                 });
+            }
+            function deleteStorageImage(url) {
+                const refUrl = firebase.storage().refFromURL(url);
+
+                refUrl
+                    .delete()
+                    .then(function () {
+                        console.log("File deleted!");
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log("Error: " + error);
+                    });
             }
         </script>
 

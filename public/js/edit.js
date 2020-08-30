@@ -16,7 +16,7 @@ document.getElementById("formDiv").style.visibility = "hidden";
 //console.log(localStorage.getItem("storageName"));
 const tempCode = localStorage.getItem("storageName");
 const code = tempCode.toString(10);
-
+var delImageUrl = "";
 var priceListArray = [];
 var dateListArray = [];
 //console.log(code);
@@ -38,6 +38,7 @@ firestore
                 preview.style.display = "block";
             } else if (doc.data().storageImageUrl != "") {
                 var src = doc.data().storageImageUrl;
+                delImageUrl = doc.data().storageImageUrl;
                 var preview = document.getElementById("file-ip-1-preview");
                 preview.src = src;
                 console.log(src);
@@ -104,6 +105,19 @@ const updatedPrice = document.querySelector("#updatedPrice");
 
 const submitBtn = document.querySelector("#submitBtn");
 
+function deleteStorageImage(url) {
+    const refUrl = firebase.storage().refFromURL(url);
+
+    refUrl
+        .delete()
+        .then(function () {
+            console.log("File deleted!");
+            location.reload();
+        })
+        .catch(function (error) {
+            console.log("Error: " + error);
+        });
+}
 submitBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -121,6 +135,7 @@ submitBtn.addEventListener("click", (e) => {
         task.then((snapshot) => snapshot.ref.getDownloadURL()).then((url) => {
             //alert("Image Upload Successful");
             console.log("update image to firestore");
+            deleteStorageImage(delImageUrl);
             updateImageToFirestore(url);
         });
     } else {

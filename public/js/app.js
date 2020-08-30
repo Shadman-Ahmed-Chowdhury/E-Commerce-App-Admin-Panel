@@ -168,6 +168,9 @@ function renderProductList(doc) {
         var imageUrl =
             "https://firebasestorage.googleapis.com/v0/b/prizer-kuwait.appspot.com/o/no-image.jpg?alt=media&token=de46086b-4c2d-4311-bbad-89ee438727c9";
     }
+    var tempCode = doc.data().productCode;
+    var parameter = tempCode.toString(10) + doc.data().storageImageUrl;
+    //console.log(parameter);
     if (type === "hot") {
         content.innerHTML +=
             `<div class="card" style="width: 24rem;">
@@ -193,9 +196,10 @@ function renderProductList(doc) {
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
         
-        <a class="btn btn-danger" onclick="deleteFunction(${
-            doc.data().productCode
-        })">Delete</a>
+       
+        <a class="btn btn-danger" onclick="deleteFunction(
+            ${doc.data().productCode}, \'${doc.data().storageImageUrl}\'
+        )">Delete</a>
 </div> `;
     } else {
         content.innerHTML +=
@@ -223,9 +227,9 @@ function renderProductList(doc) {
             doc.data().productCode
         })" class="btn btn-secondary">Edit</a>
         
-        <a class="btn btn-danger" onclick="deleteFunction(${
-            doc.data().productCode
-        })">Delete</a>
+        <a class="btn btn-danger" onclick="deleteFunction(
+            ${doc.data().productCode}, \'${doc.data().storageImageUrl}\'
+        )">Delete</a>
 </div> `;
     }
 
