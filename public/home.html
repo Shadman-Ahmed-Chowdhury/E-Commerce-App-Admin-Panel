@@ -203,7 +203,8 @@
                                     showConfirmButton: false,
                                     timer: 3000,
                                 }).then(function () {
-                                    deleteStorageImage(delImageUrl);
+                                    if(delImageUrl != "")
+                                        deleteStorageImage(delImageUrl);
                                 });
                             })
                             .catch(function (error) {

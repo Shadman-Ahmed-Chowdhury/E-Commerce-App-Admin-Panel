@@ -45,7 +45,7 @@ firestore
                 preview.style.display = "block";
             } else {
                 var src =
-                    "https://firebasestorage.googleapis.com/v0/b/prizer-kuwait.appspot.com/o/no-image.jpg?alt=media&token=de46086b-4c2d-4311-bbad-89ee438727c9";
+                    "./images/no-image.jpg";
                 var preview = document.getElementById("file-ip-1-preview");
                 preview.src = src;
                 console.log(src);
@@ -135,7 +135,8 @@ submitBtn.addEventListener("click", (e) => {
         task.then((snapshot) => snapshot.ref.getDownloadURL()).then((url) => {
             //alert("Image Upload Successful");
             console.log("update image to firestore");
-            deleteStorageImage(delImageUrl);
+            if(delImageUrl != "")
+                deleteStorageImage(delImageUrl);
             updateImageToFirestore(url);
         });
     } else {

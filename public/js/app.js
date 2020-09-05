@@ -166,7 +166,7 @@ function renderProductList(doc) {
         imageUrl = doc.data().storageImageUrl;
     } else {
         var imageUrl =
-            "https://firebasestorage.googleapis.com/v0/b/prizer-kuwait.appspot.com/o/no-image.jpg?alt=media&token=de46086b-4c2d-4311-bbad-89ee438727c9";
+            "./images/no-image.jpg";
     }
     var tempCode = doc.data().productCode;
     var parameter = tempCode.toString(10) + doc.data().storageImageUrl;
