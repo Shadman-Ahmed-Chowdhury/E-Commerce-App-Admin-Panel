@@ -256,10 +256,15 @@ searchBar.addEventListener("keyup", function (e) {
     const products = productList.getElementsByTagName("div");
     Array.from(products).forEach(function (product) {
         var a = product.getElementsByTagName("h4")[0];
-        if (a.innerHTML.toLowerCase().indexOf(term) != -1) {
+        var b = product.getElementsByTagName("p")[1];
+        if (a.innerHTML.toLowerCase().indexOf(term) != -1
+        || b.innerHTML.toLowerCase().indexOf(term) != -1) {
             product.style.display = "grid";
         } else {
             product.style.display = "none";
         }
-    });
+    }); 
+    
+    
+    
 });
