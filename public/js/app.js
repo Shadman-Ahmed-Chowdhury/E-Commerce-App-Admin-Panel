@@ -153,10 +153,18 @@ function renderProductList(doc) {
     let content = document.createElement("div");
     let span = document.createElement("span");
     let length = doc.data().priceList.length;
-    let price = doc.data().priceList[length - 1];
-    var priceFloat = price.toFixed(3);
+    let price, priceFloat, date; 
+    if(length > 0) {
+        price = doc.data().priceList[length - 1];
+        priceFloat = price.toFixed(3);
+        date = doc.data().dateList[length - 1].toString();
+    }
+    else {
+        price = 0.0; 
+        priceFloat = price.toFixed(3); 
+        date = "Coming Soon"; 
+    }
     let type = doc.data().productType.toLowerCase();
-    let date = doc.data().dateList[length - 1].toString();
 
     //console.log(priceFloat);
 
