@@ -205,6 +205,8 @@
                                 }).then(function () {
                                     if(delImageUrl != "")
                                         deleteStorageImage(delImageUrl);
+                                }).then(function() {
+                                    location.reload();
                                 });
                             })
                             .catch(function (error) {
