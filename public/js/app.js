@@ -157,7 +157,8 @@ function renderProductList(doc) {
     if(length > 0) {
         price = doc.data().priceList[length - 1];
         priceFloat = price.toFixed(3);
-        date = doc.data().dateList[length - 1].toString();
+        date = doc.data().dateList[length - 1]; 
+        console.log(date);
     }
     else {
         price = 0.0; 
@@ -274,5 +275,5 @@ searchBar.addEventListener("keyup", function (e) {
     }); 
     
     
-    
+  
 });
